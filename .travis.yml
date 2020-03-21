@@ -1,2 +1,5 @@
 language: python
-script: python validate.py $(git diff-tree --no-commit-id --name-only -r $TRAVIS_COMMIT_RANGE | grep -E ".+\/.+\.md")
+script:
+  - CHANGED_FILES=($(git diff --name-only $TRAVIS_COMMIT_RANGE))
+  - echo $CHANGED_FILES
+  - python validate.py $CHANGED_FILES
